@@ -1,0 +1,74 @@
+CustomerIDList = [2569, 1580, 2241, 7830, 5411, 2298, 8324, 3309, 5678, 2099, 7166]
+NamesList = ["Charles Babbage", "Ada Lovelace", "Katherine Johnson", "George Boole", "Grace Hopper", "Herman Hollerith", "Kathleen Booth", "Tim Berners-Lee", "Anita Borg", "John Backus", "Donald Knuth"]
+DrinksList = [8, 5, 1, 22, 15, 0, 12, 2, 3, 6, 18]
+ChipsList = [12, 2, 8, 25, 7, 0, 14, 3, 15, 35, 10]
+PointsList = [218378, 96207, 47133, 8875, 35002, 162238, 44133, 280, 52758, 42031, 5600]
+
+''' Do not change any of the code above this line '''
+
+user_input = int(input('Enter a valid ID number, or -1 to quit for the day:\n'))
+while user_input != -1:
+    if user_input in CustomerIDList :
+        inputid = CustomerIDList.index(user_input)
+        format_string = '{name:<20}{bishop:>8}'
+        print('Welcome,', NamesList[inputid]+'!')
+        print('Here are your earned purchases so far:')
+        print(format_string.format(name='   Number of Drinks:', bishop=DrinksList[inputid]))
+        print(format_string.format(name='   Number of Chips:', bishop=ChipsList[inputid]))
+        print(format_string.format(name='   Number of Points:', bishop=PointsList[inputid]))
+        print('')
+        customer_reward = int(input('Enter a number to Choose a reward: '))
+        print('')
+        print('')
+        print('(1) for a Free Drink')
+        print('(2) for a Free Bag of Chips')
+        print ('(3) for a $25 gift card')
+        print('(4) None - I just wanted to check my points')
+        print('')
+        drinks = DrinksList[inputid]
+        chips = ChipsList[inputid]
+        points = PointsList[inputid]
+        freed = drinks // 5
+        freec = chips // 7
+        gift_card = points // 5000
+        extra_points = points % 5000
+
+        if customer_reward == 1:
+            if freed >= 1:
+                print('+{:^41}+'.format('-' * 41))
+                print('|{:^41}|'.format(''))
+                print('|{:^41}|'.format(NamesList[inputid]))
+                print('|{:^41}|'.format(''))
+                print('|{:^41}|'.format('is entitled to a free drink!'))
+                print('|{:^41}|'.format(''))
+                print('+{:^41}+'.format('-' * 41))
+                DrinksList[inputid] -= 5
+            else:
+                print("Sorry, you don't have enough drink purchases for a free drink")
+        elif customer_reward == 2:
+            if freec >= 1:
+                print('+{:^41}+'.format('-' * 41))
+                print('|{:^41}|'.format(''))
+                print('|{:^41}|'.format(NamesList[inputid]))
+                print('|{:^41}|'.format(''))
+                print('|{:^41}|'.format('is entitled to a free bag of chips!'))
+                print('|{:^41}|'.format(''))
+                print('+{:^41}+'.format('-' * 41))
+                ChipsList[inputid] -= 7
+            else:
+                print("Sorry, you don't have enough chips purchases for a free bag of chips")
+        elif customer_reward == 3:
+            if gift_card >= 1:
+                print('+{:^41}+'.format('-' * 41))
+                print('|{:^41}|'.format(''))
+                print('|{:^41}|'.format(NamesList[inputid]))
+                print('|{:^41}|'.format(''))
+                print('|{:^41}|'.format('is entitled to a $25 gift card!'))
+                print('|{:^41}|'.format(''))
+                print('+{:^41}+'.format('-' * 41))
+                PointsList[inputid] -= 5000
+            else:
+                print("Sorry, you don't have enough points for a gift card")
+    else:
+        print('Error: Customer ID', user_input,'is not valid')
+    user_input = int(input('Enter a valid ID number, or -1 to quit for the day:\n'))
